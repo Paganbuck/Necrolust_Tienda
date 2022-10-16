@@ -1,0 +1,32 @@
+{
+  "name": "necrotienda",
+  "version": "1.0.0",
+  "description": "Tienda virtual de productos Black Metal",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paganbuck/Necrolust_Tienda.git"
+  },
+  "keywords": [
+    "Black Metal",
+    "Metal music",
+    "Heavy Metal",
+    "music",
+    "Death metal",
+    "Ultrametal"
+  ],
+  "author": "Necrolust Records",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Paganbuck/Necrolust_Tienda/issues"
+  },
+  "homepage": "https://github.com/Paganbuck/Necrolust_Tienda#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  }
+}
