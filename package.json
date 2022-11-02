@@ -1,10 +1,12 @@
 {
-  "name": "necrotienda",
+  "name": "necrolustshop",
   "version": "1.0.0",
-  "description": "Tienda virtual de productos Black Metal",
+  "description": "Tienda virtual de productos para metaleros",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node back/server.js", 
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon back/server",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon back/server"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,7 @@
     "Death metal",
     "Ultrametal"
   ],
-  "author": "Necrolust Records",
+  "author": "Necrolust Records / Paganbuck",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Paganbuck/Necrolust_Tienda/issues"
@@ -28,5 +30,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
