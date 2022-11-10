@@ -1,109 +1,58 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import MetaData from './layout/MetaData'
+import {useDispatch, useSelector} from 'react-redux'
+import { getProducts } from '../actions/productActions'
+import { Link } from 'react-router-dom'
+import { useAlert } from 'react-alert'
 
-const Home = () => {
-  return (
+
+export const Home = () => {
+    const { loading, productos, error} = useSelector(state=> state.products)
+    const alert= useAlert();
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        if (error){
+            return alert.error(error)
+        }
+
+        dispatch(getProducts());
+        alert.success("OK")
+    }, [dispatch])
+        
+return (
     <Fragment>
-        <MetaData title={"Lo mejor en joyeia fina"}></MetaData>
+        {loading ? <i class='fa fa-spinner fa-spin fa-3x fa-fw'></i> :(
+            <Fragment>
+                <MetaData title={"Lo mejor en joyeia fina"}></MetaData>
         <h1 id='encabezado_productos'>Nuestros productos</h1>
 
         <section id="productos" className='container mt-5'>
             <div className='row'>
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
+                {productos && productos.map (producto => (
+                    <div key={producto._id} className='col-sm-12 col-md-6 col-lg-3 my-3'>
                     <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/img1.png' alt='Imagen'/>
+                        <img className='card-img-top mx-auto' src={producto.imagen[0].url} alt={producto.imagen[0].public_id}/>
                         <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'>Anillo con Esmeralda</a></h5>
+                            <h5 id="titulo_producto"><Link to={`/producto/${producto._id}`} >{producto.nombre}</Link></h5>
                             <div className='rating mt-auto'>
                                 <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
+                                    <div className='rating-inner' style={{width: `${(producto.calificacion/5)*100}%`}} ></div>
                                 </div>
-                                <span id="No_de_opiniones">8 reviews</span>
+                                <span id="No_de_opiniones">{producto.numCalificaciones} Reviews </span>
                             </div>
-                            <p className='card-text'>$250.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>Ver detalles</a>
+                            <p className='card-text'>${producto.precio} </p><Link to={`/producto/${producto._id}`}id="view_btn" className='btn btn-block'>Ver detalles</Link>
                         </div>
                     </div>
                 </div>
-
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/img2.png' alt='Imagen'/>
-                        <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'>Collar con Esmeralda</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opiniones">10 reviews</span>
-                            </div>
-                            <p className='card-text'>$350.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/img3.png' alt='Imagen'/>
-                        <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'>Anillo imitación Esmeralda</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opiniones">5 reviews</span>
-                            </div>
-                            <p className='card-text'>$25.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/img4.png' alt='Imagen'/>
-                        <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'>Anillo corazón amatista</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opiniones">7 reviews</span>
-                            </div>
-                            <p className='card-text'>$250.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/img5.png' alt='Imagen'/>
-                        <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'>Argollas de matrimonio</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opiniones">11 reviews</span>
-                            </div>
-                            <p className='card-text'>$300.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/img6.png' alt='Imagen'/>
-                        <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'>Anillo con rubi y circonios</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opiniones">8 reviews</span>
-                            </div>
-                            <p className='card-text'>$270.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
         </section>
+
+
+            </Fragment>
+        )}
+       
     </Fragment>
   )
 }
