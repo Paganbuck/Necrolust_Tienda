@@ -17,7 +17,6 @@ export const Home = () => {
         }
 
         dispatch(getProducts());
-        alert.success("OK")
     }, [dispatch])
         
 return (
